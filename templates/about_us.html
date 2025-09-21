@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Batch-26{% endblock %}
+
+{% block extra_css %}
+<style>
+body {
+    background: linear-gradient(120deg, #23283a 0%, #1a1f2b 100%) !important;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+.about-container {
+    max-width: 900px;
+    margin: 48px auto 0 auto;
+    background: rgba(255,255,255,0.04);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    padding: 40px 24px 32px 24px;
+    color: #eaf2fb;
+    backdrop-filter: blur(2px);
+}
+.about-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: #00e6e6;
+    text-align: center;
+    margin-bottom: 28px;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 12px #00e6e688;
+}
+.about-section {
+    margin-bottom: 36px;
+}
+.about-section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #00e6e6;
+    margin-bottom: 14px;
+    letter-spacing: 0.7px;
+    text-shadow: 0 1px 8px #00e6e644;
+}
+.about-info, .about-mission {
+    font-size: 1.12rem;
+    margin-bottom: 10px;
+}
+.about-mission {
+    font-style: italic;
+    color: #b2ebf2;
+}
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+.modern-card {
+    background: linear-gradient(120deg, #23283a 60%, #2e344d 100%);
+    border-radius: 16px;
+    box-shadow: 0 2px 16px #00e6e622, 0 1px 8px rgba(0,0,0,0.14);
+    padding: 22px 18px;
+    min-width: 200px;
+    max-width: 320px;
+    text-align: left;
+    margin-bottom: 8px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+.modern-card:before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 16px;
+    pointer-events: none;
+    box-shadow: 0 0 0 2px #00e6e633;
+}
+.modern-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 4px 24px #00e6e688, 0 1px 8px rgba(0,0,0,0.18);
+}
+.card-title {
+    font-weight: 700;
+    color: #00e6e6;
+    font-size: 1.12rem;
+    margin-bottom: 8px;
+}
+.card-lead {
+    font-weight: 600;
+    color: #b2ebf2;
+    margin-bottom: 4px;
+}
+.card-members {
+    font-size: 1.02rem;
+    color: #eaf2fb;
+    margin-bottom: 2px;
+}
+.guidance-section {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.guidance-title {
+    font-weight: 700;
+    color: #00e6e6;
+    font-size: 1.12rem;
+    margin-bottom: 8px;
+    text-shadow: 0 1px 8px #00e6e644;
+}
+.guidance-name {
+    font-size: 1.12rem;
+    color: #b2ebf2;
+}
+.quote-section {
+    margin: 36px 0 18px 0;
+}
+.about-quote {
+    font-size: 1.22rem;
+    font-style: italic;
+    color: #00e6e6;
+    text-align: center;
+    background: rgba(0,230,230,0.08);
+    border-radius: 12px;
+    padding: 18px 12px;
+    margin: 0 auto;
+    max-width: 600px;
+    box-shadow: 0 2px 12px #00e6e644;
+}
+.back-btn {
+    display: block;
+    margin: 36px auto 0 auto;
+    background: linear-gradient(90deg, #00e6e6 60%, #00bfae 100%);
+    color: #23283a;
+    font-weight: 700;
+    font-size: 1.08rem;
+    border: none;
+    border-radius: 24px;
+    padding: 14px 36px;
+    box-shadow: 0 2px 12px #00e6e644;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+.back-btn:hover {
+    background: linear-gradient(90deg, #00bfae 60%, #00e6e6 100%);
+    color: #fff;
+    transform: scale(1.05);
+}
+@media (max-width: 700px) {
+    .about-container {
+        padding: 14px 2px 18px 2px;
+    }
+    .about-title {
+        font-size: 2rem;
+    }
+    .card-row {
+        gap: 12px;
+    }
+    .modern-card {
+        min-width: 140px;
+        max-width: 98vw;
+        padding: 12px 6px;
+    }
+    .about-quote {
+        font-size: 1.05rem;
+        padding: 10px 4px;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="about-container">
+    <div class="about-title">About</div>
+
+    <div class="about-section">
+        <div class="about-section-title">Info</div>
+        <div class="about-info"><b>Duration:</b> 2023 – 2026</div>
+        <div class="about-info"><b>Institute:</b> AIMCA (Anjuman Institute of Management &amp; Computer Application)</div>
+        <div class="about-mission"><b>Mission &amp; Vision:</b> To grow together as skilled professionals, contributing to innovation and technology while upholding teamwork and excellence.</div>
+    </div>
+
+    <div class="about-section">
+        <div class="about-section-title">Frontend Team</div>
+        <div class="card-row">
+            <div class="modern-card">
+                <div class="card-title">Lead</div>
+                <div class="card-lead">Azharuddin Ali</div>
+            </div>
+            <div class="modern-card">
+                <div class="card-title">Members</div>
+                <ul class="card-members" style="padding-left: 18px;">
+                    <li>Nada</li>
+                    <li>Sidra</li>
+                    <li>Hayyan</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="about-section">
+        <div class="about-section-title">Backend &amp; Hosting Team</div>
+        <div class="card-row">
+            <div class="modern-card">
+                <div class="card-title">Lead</div>
+                <div class="card-lead">Nashil Damudi</div>
+            </div>
+            <div class="modern-card">
+                <div class="card-title">Members</div>
+                <ul class="card-members" style="padding-left: 18px;">
+                    <li>Sultan</li>
+                    <li>Fahman</li>
+                    <li>Fayha</li>
+                    <li>Sayana</li>
+                    <li>Bhumika</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="guidance-section">
+        <div class="guidance-title">Guidance</div>
+        <div class="guidance-name">Deepa Ma’am</div>
+    </div>
+
+    <div class="quote-section">
+        <div class="about-quote">
+            “Alone we can do so little; together we can do so much.”<br>
+            <span style="font-size:0.98rem; color:#b2ebf2;">– Helen Keller</span>
+        </div>
+    </div>
+
+    <a href="{% url 'dashboard' %}">
+        <button class="back-btn">Back to Dashboard</button>
+    </a>
+</div>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Return Books{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/Returnbook.css' %}" />
+{% endblock %}
+
+{% block content %}
+<h2>📖 Books Management</h2>
+<div class="tabs">
+    <a href="{% url 'book_list' %}"><button class="tab">📚 All Books</button></a>
+    <a href="{% url 'lent_books' %}"><button class="tab">📕 Lent</button></a>
+    <a href="{% url 'return_book' %}"><button class="tab active">📗 Returns</button></a>
+    <a href="{% url 'overdue_books' %}"><button class="tab">📘 Overdue</button></a>
+    <a href="{% url 'add_book' %}" class="add-book-btn">+ Add Books</a>
+</div>
+<p style="margin-bottom: 15px;">All Books > Returns Books</p>
+
+<!-- Table -->
+<section class="table-section">
+    <table>
+        <thead>
+            <tr>
+                <th>Book Id ↕</th>
+                <th>Member Name ↕</th>
+                <th>Return Date ↕</th>
+                <th>Status ↕</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in returned_loans %}
+            <tr>
+                <td>{{ loan.book.isbn }}</td>
+                <td>{{ loan.member.name }}</td>
+                <td>{{ loan.returned_date|date:"d-m-Y" }}</td>
+                <td>
+                    {% if loan.status == 'returned' %}
+                        <span class="status returned">Returned</span>
+                    {% else %}
+                        <span class="status pending">Pending</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if loan.status != 'returned' %}
+                        <form method="post" action="{% url 'process_return' loan.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="return-btn">Process Return</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No returned books found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %} 

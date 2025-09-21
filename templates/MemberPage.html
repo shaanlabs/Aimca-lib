@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Members Page</title>
+    <link rel="stylesheet" href="MemberPage.css" />
+</head>
+
+<body>
+
+    <!-- Toggle and radio buttons for modal logic -->
+    <input type="checkbox" id="openModal" hidden>
+    <input type="radio" name="userType" id="studentRadio" hidden>
+    <input type="radio" name="userType" id="facultyRadio" hidden>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <h2>AIMCA<br><span>Library</span></h2>
+                <p>By Batch-26</p>
+                <a href="Returnbook.html">
+                    <button class="lend-btn">Lend/Return</button>
+                </a>
+            </div>
+            <nav class="nav-icons">
+                <a href="dashboard.html">
+                    <img src="asset/HOME1.png" alt="HOME" width="30" height="30" class="sidebar-icon">
+                </a>
+                <a href="AboutUs.html">
+                    <img src="asset/CLIP1.png" alt="CLIP" width="30" height="30" class="sidebar-icon">
+                </a>
+                <a href="BookPage.html">
+                    <img src="asset/BOOK1.png" alt="BOOKS" width="30" height="30" class="sidebar-icon">
+                </a>
+                <a href="MemberPage.html">
+                    <img src="asset/USER1.png" alt="USER" width="30" height="30" class="sidebar-icon active">
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content-->
+        <main class="main-content">
+            <div class="tabs">
+                <h2>📖 Members Management</h2>
+                <label for="openModal" class="add-memb-btn">+ Add New Member</label>
+            </div>
+
+            <div class="table-section">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Contact</th>
+                            <th>Books Borrowed </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Student</td>
+                            <td>9876543210</td>
+                            <td>2</td>
+                            <td>
+                                <img src="asset/EDIT1.png" alt="Edit" class="table-icon" />
+                                <img src="asset/TRASH1.png" alt="Delete" class="table-icon" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>Faculty</td>
+                            <td>9123456780</td>
+                            <td>1</td>
+                            <td>
+                                <img src="asset/EDIT1.png" alt="Edit" class="table-icon" />
+                                <img src="asset/TRASH1.png" alt="Delete" class="table-icon" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </section>
+        </main>
+    </div>
+
+
+    <!-- Modal Structure -->
+    <div class="modal">
+        <div class="modal-box">
+            <!-- Close -->
+            <label for="openModal" class="close-btn">&times;</label>
+
+            <!-- Select User Type -->
+            <div class="select-type">
+                <h2>Select User Type</h2>
+                <label for="studentRadio">Student</label>
+                <label for="facultyRadio">Faculty</label>
+            </div>
+
+            <!-- Student Form -->
+            <div class="form student-form">
+                <h3>Student Form</h3>
+                <input type="text" placeholder="UUCMS *" required>
+                <input type="text" placeholder="Name *" required>
+                <input type="text" placeholder="Course*" required>
+                <input type="text" placeholder="Semester/Year*" required>
+                <input type="text" placeholder="Library Card No*" required>
+                <input type="tel" placeholder="Mobile No *" required>
+                <input type="email" placeholder="Email *" required>
+                <button>Submit</button>
+            </div>
+
+            <!-- Faculty Form -->
+            <div class="form faculty-form">
+                <h3>Faculty Form</h3>
+                <input type="text" placeholder="Name *" required>
+                <input type="text" placeholder="Department *" required>
+                <input type="tel" placeholder="Mobile No *" required>
+                <input type="email" placeholder="Email *" required>
+                <button>Submit</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

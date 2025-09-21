@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Library Dashboard</title>
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo-section">
+        <h2>AIMCA<br><span>Library</span></h2>
+        <p>By Batch-26</p>
+        <a href="{% url 'lend_book' %}">
+          <button class="lend-btn">Lend/Return</button>
+        </a>
+      </div>
+      <nav class="nav-icons">
+        <a href="{% url 'dashboard' %}">
+          <img src="{% static 'asset/HOME1.png' %}" alt="HOME" width="30" height="30" class="sidebar-icon active">
+        </a>
+        <a href="{% url 'about_us' %}">
+          <img src="{% static 'asset/CLIP1.png' %}" alt="CLIP" width="30" height="30" class="sidebar-icon">
+        </a>
+        <a href="{% url 'book_list' %}">
+          <img src="{% static 'asset/BOOK1.png' %}" alt="BOOKS" width="30" height="30" class="sidebar-icon">
+        </a>
+        <a href="{% url 'member_list' %}">
+          <img src="{% static 'asset/USER1.png' %}" alt="USER" width="30" height="30" class="sidebar-icon">
+        </a>
+
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <header class="top-bar box">
+        <div class="top-left">
+          <img src="{% static 'asset/HOME1.png' %}" alt="Home" class="home-icon-img">
+          <h1>Dashboard</h1>
+        </div>
+        <p>{{ current_time|date:"l" }} | {{ current_time|date:"h:i a" }}</p>
+
+        <!-- Search bar -->
+        <div class="top-right-icons">
+          <form class="search-bar" action="#" method="get" autocomplete="off">
+            <div class="search-bar-inner">
+              <span class="search-icon">
+                <!-- Inline SVG for magnifying glass -->
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="9" cy="9" r="7" stroke="#b0b0b0" stroke-width="2" />
+                  <line x1="15.2" y1="15.2" x2="18" y2="18" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <input type="text" name="q" class="search-input" placeholder="Search here..." />
+            </div>
+          </form>
+        </div>
+      </header>
+
+      <!-- Grid Structure -->
+      <section class="main-grid">
+
+        <!-- Left Column -->
+        <div class="left-column">
+          <div class="box">
+            <h3>Books Issued</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Member ID</th>
+                  <th>Book ID</th>
+                  <th>Issue Date</th>
+                  <th>Return Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for loan in recent_loans %}
+                <tr>
+                  <td>{{ loan.member.id }}</td>
+                  <td>{{ loan.book.isbn }}</td>
+                  <td>{{ loan.borrowed_date|date:"d-m-Y" }}</td>
+                  <td>{{ loan.due_date|date:"d-m-Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="4">No recent loans</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="box">
+            <h3>Management Issued</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Member ID</th>
+                  <th>Book ID</th>
+                  <th>Issued To</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for loan in management_loans %}
+                <tr>
+                  <td>{{ loan.member.id }}</td>
+                  <td>{{ loan.book.isbn }}</td>
+                  <td>{{ loan.member.name }}</td>
+                  <td>{{ loan.borrowed_date|date:"d-m-Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="4">No management loans</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+          <div class="top-cards">
+            <div class="card">Overdue Returns <span>{{ overdue_count }}</span></div>
+            <div class="card">Available Books <span>{{ available_books }}</span></div>
+            <div class="card">Books Issued <span>{{ issued_books }}</span></div>
+          </div>
+
+          <div class="box">
+            <h3>Weekly Book Analytics</h3>
+            <div class="chart-placeholder">[Chart Here]</div>
+            <ul class="legend">
+              <li><span class="color-box color1"></span> {{ issued_percentage }}% Book Issued</li>
+              <li><span class="color-box color2"></span> {{ new_books_percentage }}% New Books Arrived</li>
+              <li><span class="color-box color3"></span> {{ overdue_percentage }}% Books Over Due</li>
+              <li><span class="color-box color4"></span> {{ sold_percentage }}% Books Sold</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <h3>Library Alerts</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Returns</th>
+                  <th>Membership ID</th>
+                  <th>Book ID</th>
+                  <th>Member</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for loan in library_alerts %}
+                <tr>
+                  <td>Today</td>
+                  <td>{{ loan.member.id }}</td>
+                  <td>{{ loan.book.isbn }}</td>
+                  <td>{{ loan.member.name }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="4">No returns due today</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+</body>
+
+</html>

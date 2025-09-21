@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Book{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/NewbookForm.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="modal">
+    <a href="{% url 'book_list' %}" class="close">&times;</a>
+
+    <h2>Edit Book Information</h2>
+    <p>Update the fields you want to change</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-button">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

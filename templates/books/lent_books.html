@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Lent Books{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/Lentbook.css' %}" />
+<link rel="stylesheet" href="{% static 'css/NewbookForm.css' %}" />
+{% endblock %}
+
+{% block content %}
+<h2>📖 Books Management</h2>
+<div class="tabs">
+    <a href="{% url 'book_list' %}"><button class="tab">📚 All Books</button></a>
+    <a href="{% url 'lent_books' %}"><button class="tab active">📕 Lent</button></a>
+    <a href="{% url 'return_book' %}"><button class="tab">📗 Returns</button></a>
+    <a href="{% url 'overdue_books' %}"><button class="tab">📘 Overdue</button></a>
+    <a href="{% url 'add_book' %}" class="add-book-btn">+ Add Books</a>
+    <a href="{% url 'lend_book' %}" class="add-book-btn" style="margin-left: 8px;">+ Lend Book</a>
+</div>
+<p style="margin-bottom: 15px;">All Books > Lent Books</p>
+
+<section class="table-section">
+    <table>
+        <thead>
+            <tr>
+                <th>Book Id ↕</th>
+                <th>Member Name ↕</th>
+                <th>Issued Date ↕</th>
+                <th>Due Date ↕</th>
+                <th>Status ↕</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for loan in lent_books %}
+            <tr>
+                <td>{{ loan.book.isbn }}</td>
+                <td>{{ loan.member.name }}</td>
+                <td>{{ loan.borrowed_date|date:"d-m-Y" }}</td>
+                <td>{{ loan.due_date|date:"d-m-Y" }}</td>
+                <td>
+                    {% if loan.is_overdue %}
+                        <span class="status overdue">Overdue</span>
+                    {% else %}
+                        <span class="status lent">Lent</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <form method="post" action="{% url 'process_return' loan.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="submit-button">Return</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No lent books found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %} 

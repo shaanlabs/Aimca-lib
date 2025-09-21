@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Members Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/MemberPage.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div style="text-align:right; margin:10px 20px 0 0;">
+    {% if user.is_authenticated %}
+        <span>Welcome, {{ user.username }}!</span>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="login-btn" style="margin-left:10px;">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="login-btn">Login</a>
+    {% endif %}
+</div>
+<!-- Toggle and radio buttons for modal logic -->
+<input type="checkbox" id="openModal" hidden>
+<input type="radio" name="userType" id="studentRadio" hidden>
+<input type="radio" name="userType" id="facultyRadio" hidden>
+
+<div class="tabs">
+    <h2>📖 Members Management</h2>
+    <label for="openModal" class="add-memb-btn">+ Add New Member</label>
+</div>
+
+<div class="table-section">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                <th>Books Borrowed</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for member in members %}
+            <tr>
+                <td>{{ member.name }}</td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.phone }}</td>
+                <td>{{ member.bookloan_set.count }}</td>
+                <td>
+                    <a href="{% url 'edit_member' member.id %}">
+                        <img src="{% static 'asset/EDIT1.png' %}" alt="Edit" class="table-icon" />
+                    </a>
+                    <a href="{% url 'delete_member' member.id %}" onclick="return confirm('Are you sure?')">
+                        <img src="{% static 'asset/TRASH1.png' %}" alt="Delete" class="table-icon" />
+                    </a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No members found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Structure -->
+<div class="modal">
+    <div class="modal-box">
+        <!-- Close -->
+        <label for="openModal" class="close-btn">&times;</label>
+
+        <!-- Select User Type -->
+        <div class="select-type">
+            <h2>Select User Type</h2>
+            <label for="studentRadio">Student</label>
+            <label for="facultyRadio">Faculty</label>
+        </div>
+
+        <!-- Student Form -->
+        <form class="form student-form" method="post" action="{% url 'add_member' %}">
+            {% csrf_token %}
+            <h3>Student Form</h3>
+            <input type="text" name="name" placeholder="Name *" required>
+            <input type="text" name="course" placeholder="Course*" required>
+            <input type="text" name="semester" placeholder="Semester/Year*" required>
+            <input type="tel" name="phone" placeholder="Mobile No *" required>
+            <input type="email" name="email" placeholder="Email *" required>
+            <input type="text" name="address" placeholder="Address *" required>
+            <button type="submit">Submit</button>
+        </form>
+
+        <!-- Faculty Form -->
+        <form class="form faculty-form" method="post" action="{% url 'add_member' %}">
+            {% csrf_token %}
+            <h3>Faculty Form</h3>
+            <input type="text" name="name" placeholder="Name *" required>
+            <input type="text" name="department" placeholder="Department *" required>
+            <input type="tel" name="phone" placeholder="Mobile No *" required>
+            <input type="email" name="email" placeholder="Email *" required>
+            <input type="text" name="address" placeholder="Address *" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %} 

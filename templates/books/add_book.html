@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}New Book Entry{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/NewbookForm.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="modal">
+    <a href="{% url 'book_list' %}" class="close">&times;</a>
+
+    <h2>New Book Information</h2>
+    <p>Fill in the details to add a new book<br>OR</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</div>
+{% endblock %} 
