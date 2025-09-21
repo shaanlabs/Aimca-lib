@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}AIMCA Library{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <h2>AIMCA<br><span>Library</span></h2>
+                <p>By Batch-26</p>
+                <a href="{% url 'lend_book' %}">
+                    <button class="lend-btn">Lend/Return</button>
+                </a>
+            </div>
+            <nav class="nav-icons">
+                <a href="{% url 'dashboard' %}">
+                    <img src="{% static 'asset/HOME1.png' %}" alt="HOME" width="30" height="30" class="sidebar-icon {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+                </a>
+                <a href="{% url 'about_us' %}">
+                    <img src="{% static 'asset/CLIP1.png' %}" alt="CLIP" width="30" height="30" class="sidebar-icon {% if request.resolver_match.url_name == 'about_us' %}active{% endif %}">
+                </a>
+                <a href="{% url 'book_list' %}">
+                    <img src="{% static 'asset/BOOK1.png' %}" alt="BOOKS" width="30" height="30" class="sidebar-icon {% if 'book' in request.resolver_match.url_name %}active{% endif %}">
+                </a>
+                <a href="{% url 'member_list' %}">
+                    <img src="{% static 'asset/USER1.png' %}" alt="USER" width="30" height="30" class="sidebar-icon {% if 'member' in request.resolver_match.url_name %}active{% endif %}">
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

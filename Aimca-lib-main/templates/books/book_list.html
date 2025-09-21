@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Books Management{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/BookPage.css' %}" />
+{% endblock %}
+
+{% block content %}
+<h2>📖 Books Management</h2>
+<div class="tabs">
+    <a href="{% url 'book_list' %}"><button class="tab active">📚 All Books</button></a>
+    <a href="{% url 'lent_books' %}"><button class="tab">📕 Lent</button></a>
+    <a href="{% url 'return_book' %}"><button class="tab">📗 Returns</button></a>
+    <a href="{% url 'overdue_books' %}"><button class="tab">📘 Overdue</button></a>
+    <a href="{% url 'add_book' %}" class="add-book-btn">+ Add Books</a>
+</div>
+<p style="margin-bottom: 15px;">All Books</p>
+
+<section class="table-section">
+    <table>
+        <thead>
+            <tr>
+                <th>Book Id ↕</th>
+                <th>Book Title</th>
+                <th>Author(s)</th>
+                <th>ISBN</th>
+                <th>Publication Year</th>
+                <th>Status ↕</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.publication_year }}</td>
+                <td>
+                    {% if book.available_quantity > 0 %}
+                        <span class="status available">Available</span>
+                    {% else %}
+                        <span class="status landed">Landed</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'edit_book' book.id %}" class="add-book-btn">Edit</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">No books found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %} 

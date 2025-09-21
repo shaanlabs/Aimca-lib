@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Lend Book{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/Lentbook.css' %}" />
+<link rel="stylesheet" href="{% static 'css/NewbookForm.css' %}" />
+{% endblock %}
+
+{% block content %}
+<h2>📖 Lend a Book</h2>
+<div class="tabs">
+    <a href="{% url 'book_list' %}"><button class="tab">📚 All Books</button></a>
+    <a href="{% url 'lent_books' %}"><button class="tab">📕 Lent</button></a>
+    <a href="{% url 'return_book' %}"><button class="tab">📗 Returns</button></a>
+    <a href="{% url 'overdue_books' %}"><button class="tab">📘 Overdue</button></a>
+    <a href="{% url 'add_book' %}" class="add-book-btn">+ Add Books</a>
+</div>
+<p style="margin-bottom: 15px;">All Books > Lend Book</p>
+
+<section class="table-section">
+    <form method="post" class="modal" style="max-width: 600px;">
+        <a href="{% url 'lent_books' %}" class="close">&times;</a>
+        {% csrf_token %}
+        <h2>Loan Information</h2>
+        <p>Fill in the details to create a new loan</p>
+        <div class="form-group">
+            <label for="member">Member *</label>
+            <select id="member" name="member" required>
+                <option value="" disabled selected>Select a member</option>
+                {% for m in members %}
+                    <option value="{{ m.id }}">{{ m.name }} ({{ m.email }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="book">Book *</label>
+            <select id="book" name="book" required>
+                <option value="" disabled selected>Select a book</option>
+                {% for b in available_books %}
+                    <option value="{{ b.id }}">{{ b.title }} by {{ b.author }} (Available: {{ b.available_quantity }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="due_date">Due Date</label>
+            <input type="date" id="due_date" name="due_date" />
+            <small>If left blank, defaults to 14 days from today.</small>
+        </div>
+        <button type="submit" class="submit-button">Lend Book</button>
+    </form>
+</section>
+{% endblock %}

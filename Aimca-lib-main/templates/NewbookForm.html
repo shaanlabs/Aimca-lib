@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Book Entry</title>
+  <link rel="stylesheet" href="NewbookForm.css" />
+</head>
+
+<body>
+  <div class="modal">
+    <span class="close">&times;</span>
+
+    <h2>New Book Information</h2>
+    <p>Fill in the details to add a new book<br>OR</p>
+    <form>
+      <div class="form-group">
+        <label for="title">Title *</label>
+        <input type="text" id="title" required>
+      </div>
+      <div class="form-group">
+        <label for="author">Author *</label>
+        <input type="text" id="author" required>
+      </div>
+      <div class="form-group">
+        <label for="isbn">ISBN *</label>
+        <input type="text" id="isbn" required>
+      </div>
+      <div class="form-group">
+        <label for="genre">Genre *</label>
+        <input type="text" id="genre" required>
+      </div>
+      <div class="form-group">
+        <label for="year">Publication Year</label>
+        <input type="number" id="year">
+      </div>
+      <div class="form-group">
+        <label for="publisher">Publisher</label>
+        <input type="text" id="publisher">
+      </div>
+      <button type="submit" class="submit-button">Submit</button>
+    </form>
+  </div>
+</body>
+
+</html>
+

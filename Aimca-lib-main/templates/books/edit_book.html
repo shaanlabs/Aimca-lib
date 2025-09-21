@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Book{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/NewbookForm.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="modal">
+    <a href="{% url 'book_list' %}" class="close">&times;</a>
+
+    <h2>Edit Book Information</h2>
+    <p>Update the fields you want to change</p>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title *</label>
+            <input type="text" id="title" name="title" value="{{ book.title }}" required>
+        </div>
+        <div class="form-group">
+            <label for="author">Author *</label>
+            <input type="text" id="author" name="author" value="{{ book.author }}" required>
+        </div>
+        <div class="form-group">
+            <label for="isbn">ISBN *</label>
+            <input type="text" id="isbn" name="isbn" value="{{ book.isbn }}" required>
+        </div>
+        <div class="form-group">
+            <label for="publication_year">Publication Year *</label>
+            <input type="number" id="publication_year" name="publication_year" value="{{ book.publication_year }}" required>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Quantity *</label>
+            <input type="number" id="quantity" name="quantity" value="{{ book.quantity }}" min="0" required>
+            <small>Active loans will be preserved; available quantity will adjust accordingly.</small>
+        </div>
+        <button type="submit" class="submit-button">Save Changes</button>
+    </form>
+</div>
+{% endblock %}
