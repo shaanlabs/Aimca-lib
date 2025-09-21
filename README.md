@@ -16,9 +16,9 @@
 
 ## 🚀 Quick Start
 
-1. <b>https://github.com/shaanlabs/Aimca-lib.git</b>
+1. <b>
     ```bash
-    git clone <repository-url>
+    git clone <[repository-url](https://github.com/shaanlabs/Aimca-lib.git</b>)>
     cd college-project
     ```
 2. <b>Create & activate virtual environment</b>
