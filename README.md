@@ -16,7 +16,7 @@
 
 ## 🚀 Quick Start
 
-1. <b>[Clone the repository](https://github.com/shaanlabs/Aimca-lib.git)</b>
+1. <b>https://github.com/shaanlabs/Aimca-lib.git</b>
     ```bash
     git clone <repository-url>
     cd college-project
