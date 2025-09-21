@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block extra_css %}
+<style>
+    .login-card {
+        max-width: 400px;
+        margin: 60px auto;
+        background: #101010;
+        color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        padding: 32px 28px 24px 28px;
+        text-align: center;
+    }
+    .login-card h2 {
+        margin-bottom: 18px;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+    .login-card .login-icon {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: #2f4fff;
+    }
+    .login-card form {
+        margin-top: 10px;
+    }
+    .login-card input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 6px;
+        border: 1px solid #222;
+        background: #181818;
+        color: #fff;
+        font-size: 1rem;
+    }
+    .login-card .login-btn {
+        width: 100%;
+        background: #2f4fff;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-top: 10px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+    }
+    .login-card .login-btn:hover {
+        background: #1f4cd0;
+        transform: scale(1.03);
+    }
+    .login-card .error {
+        color: #ff4d4d;
+        margin-top: 10px;
+        font-size: 0.98rem;
+    }
+    @media (max-width: 600px) {
+        .login-card { padding: 18px 8px; }
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="login-card">
+    <div class="login-icon">&#128274;</div>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+    {% if form.errors %}
+        <div class="error">
+            <p>Invalid username or password.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

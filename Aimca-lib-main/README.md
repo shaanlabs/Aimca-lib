@@ -1,155 +1,188 @@
+
 # 📚 AIMCA Library Management System
 
-A comprehensive Django-based library management system developed by Batch-26 students from AIMCA (Anjuman Institute of Management & Computer Application).
+<div align="center">
+  <img src="https://img.shields.io/badge/Django-5.2.4-green?logo=django" alt="Django Version" />
+  <img src="https://img.shields.io/badge/Python-3.8+-blue?logo=python" alt="Python Version" />
+  <img src="https://img.shields.io/badge/Batch-26-orange" alt="Batch 26" />
+</div>
 
-## 🎯 Project Overview
+<p align="center">
+  <b>A modern Django-based library management system by Batch-26, AIMCA</b><br>
+  <i>Efficiently manage books, members, and loans with analytics, automation, and a responsive dashboard.</i>
+</p>
 
-This library management system provides a complete solution for managing books, members, and book loans. It features a modern dashboard with analytics, book tracking, member management, and automated fine calculation for overdue books.
+---
 
-### ✨ Features
+## 🚀 Quick Start
 
-- **📊 Dashboard Analytics**: Real-time statistics and charts
-- **📚 Book Management**: Add, edit, track book inventory
-- **👥 Member Management**: Student and faculty registration
-- **📖 Loan Tracking**: Borrow, return, and overdue management
-- **💰 Fine Calculation**: Automated overdue fine calculation
-- **🔍 Search & Filter**: Advanced search capabilities
-- **📱 Responsive Design**: Works on desktop and mobile devices
+1. <b>Clone the repository</b>
+    ```bash
+    git clone <repository-url>
+    cd college-project
+    ```
+2. <b>Create & activate virtual environment</b>
+    ```bash
+    python -m venv venv
+    .\venv\Scripts\Activate.ps1  # Windows
+    # or
+    source venv/bin/activate      # macOS/Linux
+    ```
+3. <b>Install dependencies</b>
+    ```bash
+    pip install -r requirements.txt
+    ```
+4. <b>Run migrations</b>
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+5. <b>Create admin user</b>
+    ```bash
+    python manage.py createsuperuser
+    # Follow prompts for credentials
+    ```
+6. <b>Collect static files</b>
+    ```bash
+    python manage.py collectstatic
+    ```
+7. <b>Start the server</b>
+    ```bash
+    python manage.py runserver
+    ```
 
-## 🛠️ Technology Stack
+---
 
-- **Backend**: Django 5.2.4
-- **Database**: SQLite3 (can be upgraded to PostgreSQL/MySQL)
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Python**: 3.8+
-- **Package Manager**: pip
+## ✨ Features
 
-## 📋 Prerequisites
+- 📊 <b>Dashboard Analytics</b>: Real-time stats & charts
+- 📚 <b>Book Management</b>: Add, edit, track inventory
+- 👥 <b>Member Management</b>: Register students & faculty
+- 📖 <b>Loan Tracking</b>: Borrow, return, overdue management
+- 💰 <b>Fine Calculation</b>: Automated overdue fines
+- 🔍 <b>Search & Filter</b>: Advanced search capabilities
+- 📱 <b>Responsive Design</b>: Works on desktop & mobile
 
-Before setting up this project, ensure you have the following installed:
+---
 
-- **Python 3.8 or higher**
-- **pip** (Python package installer)
-- **Git** (for version control)
+## 🛠️ Tech Stack
 
-### Check Python Installation
-```bash
-python --version
-# or
-python3 --version
-```
+| Backend   | Django 5.2.4 |
+|-----------|--------------|
+| Database  | SQLite3      |
+| Frontend  | HTML5, CSS3, JS |
+| Python    | 3.8+         |
 
-### Check pip Installation
-```bash
-pip --version
-# or
-pip3 --version
-```
+---
 
-## 🚀 Installation & Setup
+## 👥 Batch-26 Team
 
-### Step 1: Clone the Repository
-```bash
-git clone <repository-url>
-cd college-project
-```
+<details>
+<summary><b>Frontend Team</b></summary>
 
-### Step 2: Create Virtual Environment
-```bash
-# Windows
-python -m venv venv
+- <b>Lead:</b> Azharuddin Ali
+- <b>Members:</b> Nada, Sidra, Hayyan
 
-# macOS/Linux
-python3 -m venv venv
-```
+</details>
 
-### Step 3: Activate Virtual Environment
-```bash
-# Windows (PowerShell)
-.\venv\Scripts\Activate.ps1
+<details>
+<summary><b>Backend & Hosting Team</b></summary>
 
-# Windows (Command Prompt)
-.\venv\Scripts\activate.bat
+- <b>Lead:</b> Nashil Damudi
+- <b>Members:</b> Sultan, Fahman, Fayha, Sayana, Bhumika
 
-# macOS/Linux
-source venv/bin/activate
-```
+</details>
 
-### Step 4: Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+<details>
+<summary><b>Guidance</b></summary>
 
-### Step 5: Run Database Migrations
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+- Deepa Ma’am
 
-### Step 6: Create Superuser (Admin)
-```bash
-python manage.py createsuperuser
-# Follow the prompts to create admin credentials
-```
+</details>
 
-### Step 7: Collect Static Files
-```bash
-python manage.py collectstatic
-```
+---
 
-### Step 8: Run Development Server
-```bash
-python manage.py runserver
-```
+## 🌐 Access
 
-## 🌐 Access the Application
+- Main App: [http://localhost:8000/](http://localhost:8000/)
+- Admin Panel: [http://localhost:8000/admin/](http://localhost:8000/admin/)
+- Books: [http://localhost:8000/books/](http://localhost:8000/books/)
+- Members: [http://localhost:8000/members/](http://localhost:8000/members/)
 
-Once the server is running, you can access:
-
-- **Main Application**: http://localhost:8000/
-- **Admin Panel**: http://localhost:8000/admin/
-- **Books Management**: http://localhost:8000/books/
-- **Members Management**: http://localhost:8000/members/
+---
 
 ## 📁 Project Structure
 
-```
+```text
 college-project/
-├── library_management/          # Django project settings
-│   ├── __init__.py
-│   ├── settings.py             # Project configuration
-│   ├── urls.py                 # Main URL routing
-│   ├── wsgi.py                 # WSGI configuration
-│   └── asgi.py                 # ASGI configuration
-├── books/                      # Books app
-│   ├── __init__.py
-│   ├── admin.py               # Admin interface configuration
-│   ├── models.py              # Book model definitions
-│   ├── views.py               # Book-related views
-│   ├── urls.py                # Book URL routing
-│   └── migrations/            # Database migrations
-├── members/                    # Members app
-│   ├── __init__.py
-│   ├── admin.py               # Admin interface configuration
-│   ├── models.py              # Member and BookLoan models
-│   ├── views.py               # Member-related views
-│   ├── urls.py                # Member URL routing
-│   └── migrations/            # Database migrations
-├── templates/                  # HTML templates
-│   ├── base.html              # Base template with sidebar
-│   ├── dashboard.html         # Main dashboard
-│   ├── about_us.html         # About page
-│   ├── books/                # Book-related templates
-│   └── members/              # Member-related templates
-├── static/                    # Static files
-│   ├── css/                  # Stylesheets
-│   ├── js/                   # JavaScript files
-│   └── asset/                # Images and other assets
-├── manage.py                  # Django management script
-├── requirements.txt           # Python dependencies
-├── .gitignore                # Git ignore rules
-└── README.md                 # This file
+├── library_management/   # Django project settings
+├── books/               # Books app
+├── members/             # Members app
+├── templates/           # HTML templates
+├── static/              # Static files
+├── manage.py            # Django management script
+├── requirements.txt     # Python dependencies
+└── README.md            # This file
 ```
+
+---
+
+## 🗄️ Models Overview
+
+**Book**: title, author, isbn, year, quantity, available_quantity, timestamps
+
+**Member**: name, email, phone, address, membership_date, is_active
+
+**BookLoan**: book, member, borrowed_date, due_date, returned_date, status
+
+---
+
+## 🔧 Configuration
+
+See `.env` and `settings.py` for environment and Django settings.
+
+---
+
+## 🚨 Common Issues & Solutions
+
+See below for troubleshooting tips on migrations, static files, templates, ports, and more.
+
+---
+
+## 🧪 Testing
+
+Test admin, book/member management, dashboard, and navigation as described above.
+
+---
+
+## 🔒 Security & Deployment
+
+- Change SECRET_KEY, set DEBUG=False, use environment variables
+- Use HTTPS, upgrade database for production
+- See checklist in original README for more
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create a feature branch
+3. Commit & push changes
+4. Open a Pull Request
+
+---
+
+## 📝 License & Support
+
+Developed by Batch-26 students of AIMCA for educational purposes.
+
+For support: open an issue or contact the team.
+
+---
+
+<div align="center">
+  <sub>Last Updated: July 2025 &nbsp;|&nbsp; Version: 1.0.0 &nbsp;|&nbsp; Django 5.2.4</sub>
+</div>
 
 ## 🗄️ Database Models
 

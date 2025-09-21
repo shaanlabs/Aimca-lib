@@ -4,7 +4,9 @@ from django.utils import timezone
 from django.contrib import messages
 from datetime import timedelta, datetime
 from .models import Book
+from .forms import BookForm
 from members.models import BookLoan, Member
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 
@@ -64,29 +66,25 @@ def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)
     return render(request, 'books/book_detail.html', {'book': book})
 
+def is_librarian(user):
+    return user.is_superuser or user.groups.filter(name='Librarian').exists()
+
+@login_required
+@user_passes_test(is_librarian)
 def add_book(request):
     if request.method == 'POST':
-        title = request.POST.get('title')
-        author = request.POST.get('author')
-        isbn = request.POST.get('isbn')
-        publication_year = request.POST.get('publication_year')
-        quantity = request.POST.get('quantity', 1)
-        
-        try:
-            book = Book.objects.create(
-                title=title,
-                author=author,
-                isbn=isbn,
-                publication_year=publication_year,
-                quantity=quantity,
-                available_quantity=quantity
-            )
+        form = BookForm(request.POST)
+        if form.is_valid():
+            book = form.save(commit=False)
+            book.available_quantity = book.quantity
+            book.save()
             messages.success(request, f'Book "{book.title}" added successfully!')
             return redirect('book_list')
-        except Exception as e:
-            messages.error(request, f'Error adding book: {str(e)}')
-    
-    return render(request, 'books/add_book.html')
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = BookForm()
+    return render(request, 'books/add_book.html', {'form': form})
 
 def lend_book(request):
     # Display form and handle lending a book to a member
@@ -143,41 +141,27 @@ def lend_book(request):
         'available_books': available_books,
     })
 
+@login_required
+@user_passes_test(is_librarian)
 def edit_book(request, pk):
-    # Edit book details (title, author, isbn, publication_year, quantity)
     book = get_object_or_404(Book, pk=pk)
     if request.method == 'POST':
-        title = request.POST.get('title')
-        author = request.POST.get('author')
-        isbn = request.POST.get('isbn')
-        publication_year = request.POST.get('publication_year')
-        try:
-            new_quantity = int(request.POST.get('quantity', book.quantity))
-        except (TypeError, ValueError):
-            new_quantity = book.quantity
-
-        try:
-            # Update basic fields
-            book.title = title
-            book.author = author
-            book.isbn = isbn
-            book.publication_year = int(publication_year) if publication_year else book.publication_year
-            # Adjust available_quantity to respect active loans
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            updated_book = form.save(commit=False)
             active_loans = BookLoan.objects.filter(book=book, status='borrowed').count()
-            if new_quantity < active_loans:
+            if updated_book.quantity < active_loans:
                 messages.warning(request, f"Quantity set below active loans ({active_loans}). Adjusted to match.")
-                new_quantity = active_loans
-            book.quantity = new_quantity
-            # Ensure available = total - active_loans
-            book.available_quantity = max(0, new_quantity - active_loans)
-
-            book.save()
-            messages.success(request, f'Book "{book.title}" updated successfully!')
+                updated_book.quantity = active_loans
+            updated_book.available_quantity = max(0, updated_book.quantity - active_loans)
+            updated_book.save()
+            messages.success(request, f'Book "{updated_book.title}" updated successfully!')
             return redirect('book_list')
-        except Exception as e:
-            messages.error(request, f'Error updating book: {str(e)}')
-
-    return render(request, 'books/edit_book.html', {'book': book})
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = BookForm(instance=book)
+    return render(request, 'books/edit_book.html', {'form': form, 'book': book})
 
 def lent_books(request):
     lent_books = BookLoan.objects.filter(status='borrowed').order_by('-borrowed_date')

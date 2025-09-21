@@ -24,4 +24,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("books.urls")),
     path("members/", include("members.urls")),
+    path("accounts/", include("django.contrib.auth.urls")),  # Enables login/logout/password management
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

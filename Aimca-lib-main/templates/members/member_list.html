@@ -8,6 +8,17 @@
 {% endblock %}
 
 {% block content %}
+<div style="text-align:right; margin:10px 20px 0 0;">
+    {% if user.is_authenticated %}
+        <span>Welcome, {{ user.username }}!</span>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="login-btn" style="margin-left:10px;">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}" class="login-btn">Login</a>
+    {% endif %}
+</div>
 <!-- Toggle and radio buttons for modal logic -->
 <input type="checkbox" id="openModal" hidden>
 <input type="radio" name="userType" id="studentRadio" hidden>

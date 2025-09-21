@@ -49,15 +49,20 @@
         </div>
         <p>{{ current_time|date:"l" }} | {{ current_time|date:"h:i a" }}</p>
 
-        <!-- Search icon -->
+        <!-- Search bar -->
         <div class="top-right-icons">
-          <div class="search-container">
-            <input type="checkbox" id="toggle-search">
-            <label for="toggle-search" class="search-icon">
-              <img src="{% static 'asset/search.png' %}" alt="Search" />
-            </label>
-            <input type="text" class="search-box" placeholder="Search here...">
-          </div>
+          <form class="search-bar" action="#" method="get" autocomplete="off">
+            <div class="search-bar-inner">
+              <span class="search-icon">
+                <!-- Inline SVG for magnifying glass -->
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="9" cy="9" r="7" stroke="#b0b0b0" stroke-width="2" />
+                  <line x1="15.2" y1="15.2" x2="18" y2="18" stroke="#b0b0b0" stroke-width="2" stroke-linecap="round" />
+                </svg>
+              </span>
+              <input type="text" name="q" class="search-input" placeholder="Search here..." />
+            </div>
+          </form>
         </div>
       </header>
 
