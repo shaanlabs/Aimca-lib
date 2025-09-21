@@ -25,7 +25,6 @@
     ```bash
     python -m venv venv
     .\venv\Scripts\Activate.ps1  # Windows
-    # or
     source venv/bin/activate      # macOS/Linux
     ```
 3. <b>Install dependencies</b>
@@ -36,20 +35,12 @@
     ```bash
     python manage.py makemigrations
     python manage.py migrate
+[https://github.com/shaanlabs/Aimca-lib.git](https://github.com/shaanlabs/Aimca-lib.git)
     ```
-5. <b>Create admin user</b>
     ```bash
     python manage.py createsuperuser
     # Follow prompts for credentials
-    ```
-6. <b>Collect static files</b>
-    ```bash
-    python manage.py collectstatic
-    ```
-7. <b>Start the server</b>
-    ```bash
     python manage.py runserver
-    ```
 
 ---
 
@@ -59,15 +50,12 @@
 - 📚 <b>Book Management</b>: Add, edit, track inventory
 - 👥 <b>Member Management</b>: Register students & faculty
 - 📖 <b>Loan Tracking</b>: Borrow, return, overdue management
-- 💰 <b>Fine Calculation</b>: Automated overdue fines
 - 🔍 <b>Search & Filter</b>: Advanced search capabilities
 - 📱 <b>Responsive Design</b>: Works on desktop & mobile
 
 ---
 
 ## 🛠️ Tech Stack
-
-| Backend   | Django 5.2.4 |
 |-----------|--------------|
 | Database  | SQLite3      |
 | Frontend  | HTML5, CSS3, JS |
@@ -75,27 +63,18 @@
 
 ---
 
-## 👥 Batch-26 Team
-
 <details>
 <summary><b>Frontend Team</b></summary>
 
 - <b>Lead:</b> Azharuddin Ali
 - <b>Members:</b> Nada, Sidra, Hayyan
-
 </details>
 
 <details>
-<summary><b>Backend & Hosting Team</b></summary>
 
 - <b>Lead:</b> Nashil Damudi
 - <b>Members:</b> Sultan, Fahman, Fayha, Sayana, Bhumika
-
-</details>
-
-<details>
 <summary><b>Guidance</b></summary>
-
 - Deepa Ma’am
 
 </details>
@@ -111,7 +90,6 @@
 
 ---
 
-## 📁 Project Structure
 
 ```text
 college-project/
@@ -121,33 +99,25 @@ college-project/
 ├── templates/           # HTML templates
 ├── static/              # Static files
 ├── manage.py            # Django management script
-├── requirements.txt     # Python dependencies
 └── README.md            # This file
 ```
 
 ---
 
-## 🗄️ Models Overview
 
 **Book**: title, author, isbn, year, quantity, available_quantity, timestamps
 
 **Member**: name, email, phone, address, membership_date, is_active
 
-**BookLoan**: book, member, borrowed_date, due_date, returned_date, status
 
 ---
 
 ## 🔧 Configuration
 
-See `.env` and `settings.py` for environment and Django settings.
 
 ---
 
-## 🚨 Common Issues & Solutions
 
-See below for troubleshooting tips on migrations, static files, templates, ports, and more.
-
----
 
 ## 🧪 Testing
 
@@ -156,7 +126,6 @@ Test admin, book/member management, dashboard, and navigation as described above
 ---
 
 ## 🔒 Security & Deployment
-
 - Change SECRET_KEY, set DEBUG=False, use environment variables
 - Use HTTPS, upgrade database for production
 - See checklist in original README for more
@@ -164,7 +133,6 @@ Test admin, book/member management, dashboard, and navigation as described above
 ---
 
 ## 🤝 Contributing
-
 1. Fork the repo
 2. Create a feature branch
 3. Commit & push changes
